@@ -34,13 +34,26 @@ public class AppAvailability extends CordovaPlugin {
         }
     }
     
+    public ApplicationInfo getApplicationInfo(String uri) {
+        Context ctx = this.cordova.getActivity().getApplicationContext();
+        final PackageManager pm = ctx.getPackageManager();
+
+        try {
+            return pm.getApplicationInfo(uri, 0);
+        }
+        catch(PackageManager.NameNotFoundException e) {
+            return null;
+        }
+    }
+    
     private void checkAvailability(String uri, CallbackContext callbackContext) {
 
-        PackageInfo info = getAppPackageInfo(uri);
-
-        if(info != null) {
+        PackageInfo pInfo = getAppPackageInfo(uri);
+        ApplicationInfo aInfo = getApplicationInfo(uri);
+            
+        if(pInfo != null && aInfo != null) {
             try {
-                callbackContext.success(this.convertPackageInfoToJson(info));
+                callbackContext.success(this.convertPackageInfoToJson(pInfo, aInfo));
             } 
             catch(JSONException e) {
                 callbackContext.error("");    
@@ -51,10 +64,11 @@ public class AppAvailability extends CordovaPlugin {
         }
     }
 
-    private JSONObject convertPackageInfoToJson(PackageInfo info) throws JSONException {
+    private JSONObject convertPackageInfoToJson(PackageInfo pInfo, ApplicationInfo aInfo) throws JSONException {
         JSONObject json = new JSONObject();
-        json.put("version", info.versionName);
-        json.put("appId", info.packageName);
+        json.put("version", pInfo.versionName);
+        json.put("appId", pInfo.packageName);
+        json.put("enabled", aInfo.enabled);
 
         return json;
     }
