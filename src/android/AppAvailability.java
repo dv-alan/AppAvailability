@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageInfo;
+import android.content.pm.ApplicationInfo;
 
 public class AppAvailability extends CordovaPlugin {
     @Override
