@@ -1,6 +1,6 @@
 {
   "_from": "git+https://github.com/dv-alan/AppAvailability.git",
-  "name": "cordova-plugin-appavailability",
+  "name": "cordova-plugin-appavailability-dv-it",
   "version": "0.4.2",
   "description": "This plugin for Cordova and PhoneGap allows you to check if an app is installed. It requires an URI Scheme (iOS) or a Package Name (Android).",
   "_requested": {
@@ -13,7 +13,7 @@
   },
   "_spec": "git+https://github.com/dv-alan/AppAvailability.git",
   "cordova": {
-    "id": "cordova-plugin-appavailability",
+    "id": "cordova-plugin-appavailability-dv-it",
     "platforms": [
       "ios",
       "android"
